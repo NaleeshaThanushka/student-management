@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Student = require('../models/Student')
 
 
 router.post('/add', async(req, res)=>{
@@ -7,18 +8,14 @@ router.post('/add', async(req, res)=>{
         const { name, age, course } = req.body;
 
         if(!name || !age || !course){
-            res.status(500).json({
+            return res.status(400).json({
                 message:'All fields required'
             })
-        const newStudent = {
-            id: Date.now(),
-            name,
-            age,
-            course,
-        };
-        const savedStudent = await newStudent.create();
-        return res.status(201).json(savedStudent)
     }
+    const newStudent = new Student({name,age,course});
+    const saveStudent = await newStudent.save();
+
+    return res.status(201).json(saveStudent)
     }
     catch(error){
         res.status(500).json({
