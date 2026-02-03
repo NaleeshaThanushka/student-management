@@ -35,4 +35,19 @@ router.get('/', async (req, res)=>{
     }
 })
 
+router.delete('/":id', async(req, res)=>{
+    try{
+        const studentId = req.params.id;
+        const deletedStd = await Student.findByIdAndDelete(studentId);
+        res.status(200).json({
+            message:'Student Deleted',
+            studentName: deletedStd.name
+        })
+    }catch(error){
+        res.status(500).json({
+            message:'Error deleting student'
+        })
+    }
+})
+
 module.exports = router;
