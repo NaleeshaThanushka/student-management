@@ -18,9 +18,6 @@ mongoose.connect(process.env.MONGO_URI)
         console.log('MongoDB connection error', err)
     })
 app.use('/api/students', studentRoutes);
-app.get("/", (req,res)=>{
-    res.send("Student management backend running..🥵");
-});
 
 const PORT = process.env.PORT || 5000
 
