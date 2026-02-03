@@ -50,4 +50,30 @@ router.delete('/":id', async(req, res)=>{
     }
 })
 
+router.put('/:id', async(req, res)=>{
+    try{
+        const studentId = req.params.id;
+        const {name, age, course} = req.body;
+
+        const updatedStudent = await Student.findByIdAndUpdate(
+            studentId,
+            {name, age, course},
+            {new: true}
+        );
+        res.status(200).json({
+            message : 'Student Updated Successfully 🥰'
+        })
+        if(!updatedStudent){
+            res.status(404).json({
+                message : 'Student not found 😢'
+            })
+        }
+
+    }catch(error){
+        res.status(500).json({
+            message : 'Fail to update student 🥹'
+        })
+    }
+})
+
 module.exports = router;
