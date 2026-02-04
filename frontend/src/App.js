@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         {/* Default page → Add Student */}
-        <Route path="/" element={<AddStudent />} />
+        <Route path="/" element={<AddStudent/>} />
 
         {/* Edit student page */}
         <Route path="/edit/:id" element={<EditStudent />} />
